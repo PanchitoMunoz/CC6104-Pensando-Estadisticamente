@@ -92,7 +92,7 @@ Un amigue cercano a usted le comenta que le preocupa salir a la calle cuando hay
 >
 > -   En segunda instancia, que exista una alta correlación no implica una causa-efecto: se puede deber a que es otra variable que no se está considerando es lo que causa ese efecto (por ejemplo, antes se pensaba que el café hacía mal, pero era porque los estudios de los tiempos en que se concluyó eso se pensaba que fumar era bueno, y las personas que tomaban café también fumaban mucho). En concreto con el ejemplo, puede dar el caso en que las personas que no poseen un estilo de vida saludable sean más propensos a comer más helado, por lo que puede que la verdadera causa sea un estilo de vida poco saludable.
 >
-> -    En tercera instancia, hay que observar que el estudio se hizo con personas en Santiago: aunque sea una muestra en la que le representa, hay que tener en cuenta que es necesario considerar una muestra más homogénea.
+> -   En tercera instancia, hay que observar que el estudio se hizo con personas en Santiago: aunque sea una muestra en la que le representa, hay que tener en cuenta que es necesario considerar una muestra más homogénea.
 >
 > Con respecto a que si se debería de preocupar, le diría que no tiene que preocuparse tanto, pues si no se muestra el coeficiente de correlación, no se tendría un factor de incerteza de tal estudio. Siempre pueden existir contraejemplos de la alta correlación. Además, es sólo una correlación, es necesario más estudios decisivos que permitan aislar de otras variables que puedan "ensuciar" los resultados.
 
@@ -106,7 +106,13 @@ Señale las diferentes aplicaciones que poseen las visualizaciones: Boxplot, his
 
 Suponga que esta estudiando la diferencia en los sueldos de las personas que viven en Santiago y Rancagua. Suponiendo que los datos poseen outliers, ¿Que métrica de resumen utilizaría para comparar los datos?. Justifique su respuesta.
 
-> Respuesta Aquí
+> Empezar por comentar que la moda **no sería tan útil en este caso**. Al tener variables (más o menos) continuas, y no variables categóricas, sería difícil ocupar esta métrica de resumen. Es más, inclusive si se ocupará esta métrica, carecería de sentido e interpretación, pues esta dependerá de cómo se escogieron los intervalos para agrupar los datos.
+>
+> Ahora bien, una buena métrica sería la mediana, pues este se puede interpretar bastante bien. Por ejemplo, si la mediana es muy bajo al promedio, entonces se puede tener afirmaciones como "la mitad de los chilenos poseen un sueldo menor a X" (con X la mediana).
+>
+> El promedio en este caso habría que mirarlo con cuidado: es muy usual que las personas con mayor status social vivan en Santiago, y puede que los outliers, aunque sean valores extremos muy grandes (o pequeños), también representa la desigualdad que posee el país. Es decir, los outliers no se introdujeron por error, si no por el contexto en que se vive. Sin embargo, si se desea tener una representación de un verdadero "promedio" de una región, esta métrica no sería la más apropiada.
+>
+> Una más apropiada para este caso resultaría ser la media truncada, empezando primero con considerar el 95% de los datos para obtener el promedio, y si los valores son más o menos cercanos a la mediana, considerar ese rango. Si es que poseen mucha diferencia (digamos, un error relativo del 50%) entonces se consideraría en tomar un rango más acotado, como 90% u 85%.
 
 #### **Pregunta 5:**
 
