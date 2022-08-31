@@ -118,7 +118,7 @@ Suponga que esta estudiando la diferencia en los sueldos de las personas que viv
 
 En base al mismo dataset de sueldos para las regiones de Santiago y Rancagua, le comentan que existe un error en los datos y que estos deben ser modificados aumentando un 10% el valor original y sumando $15.000$ a cada uno de los datos. ¿Como se ve afectada la media, mediana y desviación estándar con esta modificación?. Explique a través de ecuaciones el cambio que experimentan las métricas de resumen respecto al valor original, considere para el caso de la media $\bar{X}_{old} = \dfrac{1}{m} \sum^{m}_{i=1} x_i$ y $sd_{old} = \sqrt{\dfrac{1}{(m-1)}\sum_{i=1}^{m}(x_i-\bar{x})^{2}}$ para la desviación estándar.
 
-> Respuesta Aquí
+> Para la media y mediana, estas serán aumentadas en un $1.1$ del valor original, y después sumando $15.000$ al resultado. Mientras que para la desviación estándar, esta será aumentada en un $1.21 = (1.1)^2$.
 
 #### **Pregunta 6:**
 
@@ -126,7 +126,9 @@ Suponga que debe responder un examen sorpresa de 10 preguntas, con 5 alternativa
 
 **Nota:** Puede resolver el ejercicio desarrollándolo a mano o utilizando código en R.
 
-> Respuesta Aquí
+> Tenemos que $\mathbb{P}(\text{tener más de } 5 \text{ buenas}) = \sum_{i=1}^{5} \left(\frac{1}{5}\right)^{5+i} \left(\frac{4}{5}\right)^{5-i} =$
+
+    {r eval=FALSE}
 
 #### **Pregunta 7:**
 
@@ -139,7 +141,7 @@ Supongamos que el 10% de los alumnos del curso utilizan Mac, el 60% utiliza Wind
 Señale si las siguientes declaraciones son verdaderas o falsas respecto a las variables aleatorias, en caso de ser falsa justifique su respuesta:
 
 -   [ ] Como las variables aleatorias son funciones que nos permiten obtener valores de probabilidad, siempre podemos obtener $\mathbb{P}(X=x)>0$ evaluando en una $f(x)$ continua y discreta.
--   [ ] Una PDF bien definida solo puede tener valores menores a 1 y un área debajo de la curva igual a 1.
+-   [ ] Una PDF bien definida solo puede tener valores menores a 1 y un área debajo de la curva igual a 1. False. Contraejemplo: La exponencial.
 -   [ ] La CDF puede ser representada como la integral de la PDF y PMF.
 -   [ ] Una CDF es definida para todo x, continua hacia la derecha y no es decreciente.
 
