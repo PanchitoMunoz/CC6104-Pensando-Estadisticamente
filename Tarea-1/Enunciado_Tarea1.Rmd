@@ -76,11 +76,7 @@ A continuación, se presentaran diferentes preguntas que abordan las temáticas 
 
 ¿Por qué la estadística es importante?, ¿Que nos permite realizar con los datos?. De algún ejemplo.
 
-> -   **En describir el mundo** y entenderlo
->
-> -   **Para tomar decisiones**. A veces, en base a los datos hay que tomar una decisión. La idea es medir la incertidumbre
->
-> -   **Para predecir.** Muchas veces queremos predecir muchas cosas, basado en el conocimiento previo. Esto se puede hacer basado en la estadística.
+> La estadística resulta ser importante para entender problemas del mundo real e interpretarlos, y para no ser manipulado por los medios y por falsas noticias. A través de la estadística, se puede utilizar los datos para describir el mundo, para predecir comportamientos y tomar decisiones. Un ejemplo de uso de la estadística es para responder a la pregunta: ¿Es la grasa satrada algo malo para nuestra dieta? A través de varios análisis, se puede inferir que, contrario a lo que se cree, no lo es.
 
 #### **Pregunta 2:**
 
