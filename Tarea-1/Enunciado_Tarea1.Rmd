@@ -102,13 +102,7 @@ Señale las diferentes aplicaciones que poseen las visualizaciones: Boxplot, his
 
 Suponga que esta estudiando la diferencia en los sueldos de las personas que viven en Santiago y Rancagua. Suponiendo que los datos poseen outliers, ¿Que métrica de resumen utilizaría para comparar los datos?. Justifique su respuesta.
 
-> Empezar por comentar que la moda **no sería tan útil en este caso**. Al tener variables (más o menos) continuas, y no variables categóricas, sería difícil ocupar esta métrica de resumen. Es más, inclusive si se ocupará esta métrica, carecería de sentido e interpretación, pues esta dependerá de cómo se escogieron los intervalos para agrupar los datos.
->
-> Ahora bien, una buena métrica sería la mediana, pues este se puede interpretar bastante bien. Por ejemplo, si la mediana es muy bajo al promedio, entonces se puede tener afirmaciones como "la mitad de los chilenos poseen un sueldo menor a X" (con X la mediana).
->
-> El promedio en este caso habría que mirarlo con cuidado: es muy usual que las personas con mayor status social vivan en Santiago, y puede que los outliers, aunque sean valores extremos muy grandes (o pequeños), también representa la desigualdad que posee el país. Es decir, los outliers no se introdujeron por error, si no por el contexto en que se vive. Sin embargo, si se desea tener una representación de un verdadero "promedio" de una región, esta métrica no sería la más apropiada.
->
-> Una más apropiada para este caso resultaría ser la media truncada, empezando primero con considerar el 95% de los datos para obtener el promedio, y si los valores son más o menos cercanos a la mediana, considerar ese rango. Si es que poseen mucha diferencia (digamos, un error relativo del 50%) entonces se consideraría en tomar un rango más acotado, como 90% u 85%.
+> Empezar comentando que no se utilizaría la moda en este caso, pues este se utiliza para variables categóricas, y los sueldos no se pueden ver como este tipo de variables. Una métrica que resultaría útil en este caso sería la mediana, pues esta es robusta ante outliers; mientras que el promedio sería una mala métrica por ser sensible a esta última, aunque se podría utilizar el promedio truncado para robustecerlo ante este problema.
 
 #### **Pregunta 5:**
 
