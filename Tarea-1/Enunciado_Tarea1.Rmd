@@ -137,7 +137,29 @@ prob_total
 
 Supongamos que el 10% de los alumnos del curso utilizan Mac, el 60% utiliza Windows y el 30% utiliza Linux. Supongamos que el 50% de los usuarios de Mac, el 78% de los usuarios de Windows y el 20% de los usuarios de Linux han sucumbido bajo un terrible virus. Al seleccionar una persona al azar nos enteramos de que su sistema está infectado por el virus. ¿Cuál es la probabilidad de que sea un alumno con Windows?.
 
-> Respuesta Aquí
+> Nos preguntan $\mathbb{P}(\text{Windows} | \text{Virus})$ , por Bayes sabemos que
+>
+> $$
+> \mathbb{P}(\text{Windows} | \text{Virus}) = \frac{\mathbb{P}(\text{Virus} | \text{Windows}) \cdot \mathbb{P}(\text{Windows})}{\mathbb{P}(\text{Virus})} = \frac{\mathbb{P}(\text{Virus} | \text{Windows}) \cdot \mathbb{P}(\text{Windows})}{\sum_{SO\in\{M,W,L\}} \mathbb{P}(\text{Virus} | SO) \cdot \mathbb{P}(SO)}
+> $$
+>
+> Donde cada uno de los datos es fácilmente obtenible de los datos, y se calcula con la siguiente celda de código. El resultado es que se tiene un $80.9689\%$ de probabilidad de que el alumno sea un usuario de Windows dado que se sabe que tiene un virus.
+
+```{r, eval=TRUE}
+# Priors
+p.m <- 0.10  # Probabilidad de ocupar Mac
+p.w <- 0.60  # Probabilidad de ocupar Windows
+p.l <- 0.30  # Probabilidad de ocupar Linux
+# Verosimilitudes
+p.virus.m <- 0.50  # Probabilidad de tener un virus dado que ocupa Mac
+p.virus.w <- 0.78  # Probabilidad de tener un virus dado que ocupa Windows
+p.virus.l <- 0.20  # Probabilidad de tener un virus dado que ocupa Linux
+# Probabilidades totales para calcular la probabilidad de tener un virus
+p.virus <- p.virus.m * p.m + p.virus.w * p.w + p.virus.l * p.l
+# Calcular la posterior
+p.w.virus <- p.virus.w * p.w / p.virus
+p.w.virus
+```
 
 #### **Pregunta 8:**
 
@@ -231,12 +253,24 @@ Realice el experimento de lanzar una moneda cargada 1000 veces y observe el comp
 **Respuesta**
 
 ```{r eval=TRUE}
-# Simular lanzamientos
-for (lanzamientos in 1:1000) {
-  
-}
+# Probabilidad de salir cara
+p <- 4/5
+# Número de intentos
+N <- 1000
+
+# Lanzamientos
+lanzamientos <- rbinom(n=N, size=1, prob=p)
+# Número de veces que salió cara
+lanzamientos_acum <- cumsum(lanzamientos)
+# Número de lanzamientos
+n_lanzamientos <- seq(from=1, to=N)
+# Frecuencia relativa
+frecuencia_rel <- lanzamientos_acum / n_lanzamientos
 
 # Gráfico de la convergencia
+plot(n_lanzamientos, frecuencia_rel, main="Frecuencia relativa vs. El número de lanzamientos")
+lines(n_lanzamientos, p*replicate(N, 1), lwd=2, type='l', col='red')
+# Aquí pondría una leyenda si existiera una forma bonita de hacerlas
 ```
 
 #### El problema de Monty Hall
