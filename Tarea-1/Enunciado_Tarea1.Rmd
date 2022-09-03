@@ -116,9 +116,22 @@ Suponga que debe responder un examen sorpresa de 10 preguntas, con 5 alternativa
 
 **Nota:** Puede resolver el ejercicio desarrollándolo a mano o utilizando código en R.
 
-> Tenemos que $\mathbb{P}(\text{tener más de } 5 \text{ buenas}) = \sum_{i=1}^{5} \left(\frac{1}{5}\right)^{5+i} \left(\frac{4}{5}\right)^{5-i} =$
+> Tenemos que $\mathbb{P}(\text{Tener más de } 5 \text{ buenas})$ es igual a la suma $\sum_{k=6}^{10} \mathbb{P}(\text{Tener exactamente } k \text{ buenas})$ por independencia de eventos. Además, cada una de esas probabilidades se puede entender como una binomial de $n=10$ intentos y probabilidad de éxito de $p=1/5$ . Por lo tanto $\mathbb{P}(\text{Tener más de } 5 \text{ buenas}) = \sum_{i=6}^{10} {10 \choose i}\left(\frac{1}{5}\right)^{i} \left(\frac{4}{5}\right)^{10-i} = 6.3694 \cdot 10^{-3}$
 
-    {r eval=FALSE}
+```{r eval=TRUE}
+# install.packages("gtools")
+library(gtools)
+
+combinatorio <- function(N, n) {
+  result <- factorial(N) / (factorial(n) * factorial(N - n))
+  return(result)
+}
+
+indx <- seq(6, 10)
+probs <- combinatorio(10, indx) * ((1/5) ** indx) * ((4/5) ** (10 - indx))
+prob_total <- sum(probs)
+prob_total
+```
 
 #### **Pregunta 7:**
 
