@@ -292,16 +292,69 @@ Imagine que usted es participante del concurso y desea calcular la probabilidad 
 ```{r eval=FALSE}
 # Creamos una función que simule el juego
 montyhall <- function(cambiar = TRUE){
-  Puertas <- sample(1:3,3)             #Puertas donde la posición que tiene el 3 es el premio
-  posicion <- sample(1:3,1)            #Elección del participante.
+  # Puertas donde la posición que tiene el 3 es el premio
+  puertas <- sample(1:3,3)
+  # Elección del participante.
+  posicion <- sample(1:3,1)
   
-  return(Eleccion) # Retornamos la elección, esta puede que tenga el premio o no
+  # Puerta en la que se encuentra el premio
+  puerta.ganadora <- match(3, puertas)
+  # Puertas donde no se encuentra el premio
+  puertas.vacias <- match(c(1, 2), puertas)
+  # Posibles puertas a abrir
+  posibles.puertas <- setdiff(puertas.vacias, posicion)
+  # Puerta a abrir
+  if (length(posibles.puertas)==1) {
+    puerta.abierta <- posibles.puertas[1]
+  } else {
+    puerta.abierta <- sample(posibles.puertas, 1)
+  }
+  # Eligiendo la otra puerta
+  puerta.alternativa <- setdiff(1:3, c(posicion, puerta.abierta))
+  
+  # Setear la elección dependiendo si escoge cambiar o no
+  if(cambiar) {
+    eleccion <- puerta.alternativa
+  } else {
+    eleccion <- posicion
+  }
+  
+  # Revisar si se ganó
+  ganador <- as.integer(eleccion == puerta.ganadora)
+  
+  return(ganador) # Retornamos la elección, esta puede que tenga el premio o no
 }
 
 # Función que simula N juegos
 n_juegos <- function(n = 10 ,cambiar_puerta = TRUE){
+  realizaciones <- c()
   
+  for (i in 1:n) {
+    realizacion <- montyhall(cambiar_puerta)
+    realizaciones <- append(realizaciones, realizacion)
+  }
+  
+  return(realizaciones)
 }
+
+# Probabilidad de ganar
+p <- 2/3
+# Número de intentos
+N <- 1000
+
+# Realizaciones del juego
+juegos <- n_juegos(N, TRUE)
+# Número de veces que se ganó
+juegos_acum <- cumsum(juegos)
+# Número de veces que se intentó
+n_intentos <- seq(from=1, to=N)
+# Frecuencia relativa
+frecuencia_rel <- juegos_acum / n_intentos
+
+# Gráfico de la convergencia
+plot(n_intentos, frecuencia_rel, main="Frecuencia relativa vs. El número de juegos")
+lines(n_intentos, p*replicate(N, 1), lwd=2, type='l', col='red')
+# Aquí pondría una leyenda si existiera una forma bonita de hacerlas
 ```
 
 ------------------------------------------------------------------------
