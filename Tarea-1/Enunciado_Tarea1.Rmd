@@ -215,12 +215,76 @@ Para esta pregunta usted deberá trabajar en base al conjunto de datos `hearth_d
 
 En base al dataset propuesto realice un análisis exploratorio de los datos (EDA). Para su análisis enfoquen el desarrollo en las siguientes tareas:
 
--   [ ] Obtenga la media, mediana, quintiles y valores máximos desde los datos que componen el dataset.
--   [ ] Obtenga la Matriz de correlación de Pearson y visualice la relación entre las variables numéricas.
--   [ ] Visualice los boxplot para las variables numéricas.
+-   [x] Obtenga la media, mediana, quintiles y valores máximos desde los datos que componen el dataset.
+-   [x] Obtenga la Matriz de correlación de Pearson y visualice la relación entre las variables numéricas.
+-   [x] Visualice los boxplot para las variables numéricas.
 -   [ ] Visualice a través de un histograma como distribuyen las variables respecto a los TARGET.
 
 **Respuesta**
+
+```{r eval=TRUE}
+df <- read.csv(file = "hearth_database.csv")
+attach(df)
+categorical <- names(df)[1:6]
+numerical <- names(df)[7:14]
+categorical
+numerical
+```
+
+Para obtener la media, mediana, quintiles y valores máximos del data set, basta obtenerlos a través de la función `summary` :
+
+```{r eval=TRUE}
+summary(df)
+```
+
+Para obtener y visualizar la matriz de correlación de pearson, es necesario instalar la librería `corrplot` para visualizar la matriz. Esto se hace de la siguiente forma:
+
+```{r eval=TRUE}
+# install.packages("corrplot")
+library("corrplot")
+mtpearson <- cor(df[numerical], method="pearson")
+corrplot(mtpearson, method="circle")
+```
+
+Para obtener los boxplots de las variables numéricas, se puede iterar sobre las variables numéricas.
+
+```{r eval=TRUE}
+for (name in numerical){
+  boxplot(df[name], main=paste("Boxplot ", name))
+}
+```
+
+```{r eval=TRUE}
+# Separar la data entre targets y no-targets
+df_yes <- df[df["target"]=="YES", numerical]
+df_no <- df[df["target"]=="NO", numerical]
+
+c1 <- rgb(173,216,230,max = 255, alpha = 80, names = "lt.blue")
+c2 <- rgb(255,192,203, max = 255, alpha = 80, names = "lt.pink")
+
+for (name in numerical) {
+  # Creación de los vectores
+  df_yes_c <- c()
+  for (v in df_yes[name]){
+    df_yes_c <- c(df_yes_c, v)
+  }
+  df_no_c <- c()
+  for (v in df_no[name]){
+    df_no_c <- c(df_no_c, v)
+  }
+  # Valores mínimos y máximos
+  b <- min(c(df_yes_c, df_no_c)) - 0.001
+  e <- max(c(df_yes_c, df_no_c))
+  # Axis
+  ax <- pretty(b:e, n = 12)
+  # Histograms
+  hg_df_no <- hist(df_no_c, breaks = ax, plot = FALSE)
+  hg_df_yes <- hist(df_yes_c, breaks = ax, plot = FALSE)
+  # Plot the histograms
+  plot(hg_df_no, col = c1)
+  plot(hg_df_yes, col = c2, add = TRUE)
+}
+```
 
 ------------------------------------------------------------------------
 
